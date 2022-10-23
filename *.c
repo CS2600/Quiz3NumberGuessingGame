@@ -8,6 +8,10 @@
 
 //If the user gets the number correct, print that they won and return to menu
 
+//If the user is too low or high, print the respective outcome
+
+//If the user inputs q, return to the menu
+
 //****Option 2****//
 
 //Print max value user can set the number
