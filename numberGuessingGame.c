@@ -7,10 +7,10 @@
 const int MAX_VALUE = 100;
 
 void playGame(int maxNumber) {
-    //Pick random number from 1 to maxNumber
+    //Pick random number from 0 to maxNumber
     time_t t;
     srand((unsigned)time(&t));
-    int number = (rand() % maxNumber) + 1;
+    int number = rand() % (maxNumber + 1);
     char input[3];
 
     //Loop until user finds number or inputs q
@@ -27,15 +27,15 @@ void playGame(int maxNumber) {
 
         if(inputNumber != -1) {
             if(inputNumber == number) {
-                printf("You win!\n");
+                printf("You win!\n\n");
                 return;
             }
             else if(inputNumber < number) {
-                printf("Too Low!\n");
+                printf("Too Low!\n\n");
                 continue;
             }
             else {
-                printf("Too High!\n");
+                printf("Too High!\n\n");
                 continue;
             }
 
@@ -50,7 +50,21 @@ void playGame(int maxNumber) {
 }
 
 void changeMaxNumber(int* maxNumber) {
+    printf("The max value that you can set the number to is %d\n", MAX_VALUE);
 
+    for(;;) {
+        int input;
+        scanf("%d", &input);
+        fflush(stdin);
+        if(input < 0 || input > MAX_VALUE) {
+            printf("Please provide a value between 0 and %d\n", MAX_VALUE);
+            continue;
+        }
+        *maxNumber = input;
+        printf("\n");
+        return;
+    }
+    
 }
 
 
@@ -62,7 +76,7 @@ int main() {
     for(;;) {
         printf("Press 1 to play a game\n");
         printf("Press 2 to change the max number\n");
-        printf("Press 3 to quit\n");
+        printf("Press 3 to quit\n\n");
 
         int option;
         for(;;) {
@@ -72,6 +86,7 @@ int main() {
                 printf("Please provide a valid input\n");
                 continue;
             }
+            printf("\n");
             break;
         }
 
@@ -86,7 +101,6 @@ int main() {
                 return 1;
         }
     }
-    
 
     return 1;
 }
