@@ -66,6 +66,13 @@ void changeMaxNumber(int* maxNumber) {
             continue;
         }
 
+        //Create file to store max number
+        FILE *file;
+
+        file = fopen("maxNumber.txt", "w+");
+        fprintf(file, "%d", input);
+        fclose(file);
+
         *maxNumber = input;
         printf("\n");
         return;
@@ -74,9 +81,21 @@ void changeMaxNumber(int* maxNumber) {
 
 
 int main() {
+    int* maxNumber;
 
-    int temp = MAX_VALUE;
-    int* maxNumber = &temp;
+    FILE *file;
+
+    //Check if a previous user request for max number exists
+    if(file = fopen("maxNumber.txt", "r")) {
+        int storedInt;
+        fscanf(file, "%d", &storedInt);
+        maxNumber = &storedInt;
+        fclose(file);
+    }
+    else { //Sets max number to default value
+        int temp = MAX_VALUE;
+        maxNumber = &temp;
+    }
 
     //Loop until quit
     for(;;) {
